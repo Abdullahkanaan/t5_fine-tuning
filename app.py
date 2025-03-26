@@ -9,25 +9,25 @@ class T5SummarizerApp(QWidget):
         super().__init__()
         self.initUI()
         
-        self.tokenizer = AutoTokenizer.from_pretrained("/home/encoder/Desktop/workspaces/LLMs_workspace/t5_small/results_t5small")
-        self.model = AutoModelForSeq2SeqLM.from_pretrained("/home/encoder/Desktop/workspaces/LLMs_workspace/t5_small/results_t5small")
+        self.tokenizer = AutoTokenizer.from_pretrained("YOUR_MODEL_PATH_HERE")
+        self.model = AutoModelForSeq2SeqLM.from_pretrained("YOUR_MODEL_PATH_HERE")
 
 
     def initUI(self):
-        self.setWindowTitle("T5 Metin Özetleme")
+        self.setWindowTitle("T5 Text Summarizer")
         self.setGeometry(100, 100, 600, 400)
 
         layout = QVBoxLayout()
         
         self.input_text = QTextEdit(self)
-        self.input_text.setPlaceholderText("Özetlenecek metni buraya girin...")
+        self.input_text.setPlaceholderText("Enter your text here...")
         layout.addWidget(self.input_text)
         
-        self.summarize_button = QPushButton("Özetle", self)
+        self.summarize_button = QPushButton("Summarize", self)
         self.summarize_button.clicked.connect(self.summarize_text)
         layout.addWidget(self.summarize_button)
         
-        self.output_label = QLabel("Özet:")
+        self.output_label = QLabel("Summarized Text:")
         layout.addWidget(self.output_label)
         
         self.output_text = QTextEdit(self)
@@ -40,7 +40,7 @@ class T5SummarizerApp(QWidget):
     def summarize_text(self):
         input_text = self.input_text.toPlainText()
         if not input_text.strip():
-            self.output_text.setText("Lütfen bir metin girin.")
+            self.output_text.setText("Please enter a text.")
             return
 
         # Model için giriş formatı
